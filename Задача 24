@@ -1,0 +1,25 @@
+using HorizonSideRobots
+
+function without!(r :: Robot, side :: HorizonSide)
+  isborder(r,side) && return
+  move!(r,side)
+  with!(r,side)
+end
+
+function with!(r :: Robot, side :: HorizonSide)
+  putmarker!(r)
+  isborder(r,side) && return
+  move!(r,side)
+  without!(r,side)
+end
+
+function linechess!(r :: Robot, side :: HorizonSide; markstart=false)
+  if markstart
+    with!(r,side) 
+  else 
+    without!(r,side) 
+  end
+end
+
+#а) - (markstart = true)
+#б) - (markstart = false)
